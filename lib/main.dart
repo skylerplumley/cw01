@@ -38,7 +38,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  void toggle() {}
+  void toggle() {
+    //String firstone =
+    //'https://raw.githubusercontent.com/skylerplumley/cw01/GSUPanther.svg.png';
+    //String secondimage = 'https://raw.githubusercontent.com/skylerplumley/cw01/Otherpanther.png';
+    setState(() {
+      firstimage = !firstimage;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +64,13 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            Image.asset(
+              firstimage
+                  ? '/Users/skylerplumley/cw1/web/icons/GSUPanther.svg.png'
+                  : '/Users/skylerplumley/cw1/web/icons/Otherpanther.png',
+              width: 200,
+              height: 200,
             ),
             SizedBox(height: 20),
             ElevatedButton(
