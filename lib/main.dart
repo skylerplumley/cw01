@@ -28,9 +28,22 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
   int _counter = 0;
   bool firstimage = true;
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 400),
+    );
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+  }
 
   void _incrementCounter() {
     setState(() {
@@ -39,9 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void toggle() {
-    //String firstone =
-    //'https://raw.githubusercontent.com/skylerplumley/cw01/GSUPanther.svg.png';
-    //String secondimage = 'https://raw.githubusercontent.com/skylerplumley/cw01/Otherpanther.png';
+    _controller.forward(from: 0);
     setState(() {
       firstimage = !firstimage;
     });
@@ -65,12 +76,15 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Image.asset(
-              firstimage
-                  ? '/Users/skylerplumley/cw1/web/icons/GSUPanther.svg.png'
-                  : '/Users/skylerplumley/cw1/web/icons/Otherpanther.png',
-              width: 200,
-              height: 200,
+            FadeTransition(
+              opacity: _animation,
+              child: Image.asset(
+                firstimage
+                    ? '/Users/skylerplumley/cw1/web/icons/GSUPanther.svg.png'
+                    : '/Users/skylerplumley/cw1/web/icons/Otherpanther.png',
+                width: 200,
+                height: 200,
+              ),
             ),
             SizedBox(height: 20),
             ElevatedButton(
@@ -86,5 +100,11 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
