@@ -43,6 +43,7 @@ class _MyHomePageState extends State<MyHomePage>
       duration: Duration(milliseconds: 400),
     );
     _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    _controller.value = 1;
   }
 
   void _incrementCounter() {
