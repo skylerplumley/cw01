@@ -30,12 +30,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool firstimage = true;
 
   void _incrementCounter() {
     setState(() {
       _counter++;
     });
   }
+
+  void toggle() {}
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +57,11 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: toggle,
+              child: Text('Toggle Image'),
             ),
           ],
         ),
